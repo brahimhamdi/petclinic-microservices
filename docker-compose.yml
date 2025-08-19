@@ -57,7 +57,7 @@ services:
       discovery-server:
         condition: service_healthy
     ports:
-    - 8084:8084
+    - 8084:8081
 
   visits-service:
     image: nexus.advancia.com:5043/docker-prive/visits-service
