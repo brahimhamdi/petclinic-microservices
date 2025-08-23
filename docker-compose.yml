@@ -39,7 +39,8 @@ services:
       timeout: 3s
       retries: 10
     depends_on:
-    - config-server
+      config-server:
+        condition: service_healthy
     ports:
      - 8761:8761
 
@@ -51,8 +52,10 @@ services:
         limits:
           memory: 512M
     depends_on:
-    - config-server
-    - discovery-server
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
     ports:
     - 8084:8081
 
@@ -64,8 +67,10 @@ services:
         limits:
           memory: 512M
     depends_on:
-    - config-server
-    - discovery-server
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
     ports:
      - 8082:8082
 
@@ -77,8 +82,10 @@ services:
         limits:
           memory: 512M
     depends_on:
-    - config-server
-    - discovery-server
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
     ports:
      - 8083:8083
 
@@ -90,8 +97,10 @@ services:
         limits:
           memory: 512M
     depends_on:
-    - config-server
-    - discovery-server
+      config-server:
+        condition: service_healthy
+      discovery-server:
+        condition: service_healthy
     ports:
      - 8080:8080
 
