@@ -1,8 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: petclinic
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nexus-data-pvc
+  namespace: petclinic
 spec:
   accessModes:
     - ReadWriteOnce
@@ -15,6 +20,7 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: nexus-pvc
+  namespace: petclinic
 spec:
   accessModes:
     - ReadWriteOnce
@@ -27,6 +33,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: nexus-service
+  namespace: petclinic
 spec:
   type: NodePort 
   selector:
@@ -47,6 +54,7 @@ metadata:
   name: sonatype-registry
   labels:
     app: sonatype-registry
+  namespace: petclinic
 spec:
   replicas: 1
   selector:
