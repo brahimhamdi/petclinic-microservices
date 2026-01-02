@@ -1,3 +1,4 @@
+.gitignore
 # Maven
 target/
 !.mvn/wrapper/maven-wrapper.jar
@@ -21,3 +22,5 @@ target/
 generated/
 
 **/.DS_Store
+
+pom.xml.old
