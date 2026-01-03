@@ -14,14 +14,9 @@ pipeline {
   }
 
   stages {
-    stage('Git Clone Projet') {
+    stage('Clone&Build Projet') {
       steps {
         git branch: 'master', url: 'https://github.com/brahimhamdi/petclinic-microservices'
-      }
-    }
-
-    stage('Build Projet') {
-      steps {
         sh 'mvn clean compile'
       }
     }
@@ -51,7 +46,7 @@ pipeline {
       }
     }
 
-    stage('Package') {
+    stage('Packages Jar') {
       steps {
         sh 'mvn package -DskipTests'
       }
@@ -129,33 +124,10 @@ pipeline {
           
           modules.each { module ->
             dir(module) {
+              def imageName = "harbor.cnte.com/petclinic/${module}:latest"
               if (fileExists('src/main/resources/application.yml')) {
                 echo "Test de l'image Docker pour ${module}"
-                
-                // Vérifier que l'image a été construite
-                def imageName = "harbor.cnte.com/petclinic/${module}:latest"
-                def imageCheck = sh(script: """
-                  docker images -q ${imageName} 2>/dev/null || echo ""
-                """, returnStdout: true).trim()
-                
-                if (imageCheck) {
-                  echo "Image ${imageName} trouvée"
-                  
-                  // Test simple: vérifier la taille de l'image
-                  sh """
-                    echo "=== Informations de l'image ==="
-                    docker image inspect ${imageName} --format 'Image: {{.RepoTags}}\nTaille: {{.Size}} bytes\nDate: {{.Created}}'
-                  """
-                  
-                  // Tester en lançant un conteneur temporaire
-                  sh """
-                    echo "=== Test de lancement du conteneur ==="
-                    timeout 30s docker run --rm ${imageName} --version 2>&1 | head -5 || true
-                  """
-                  
-                } else {
-                  echo "Image ${imageName} non trouvée"
-                }
+                  sh " timeout 30s docker run --rm ${imageName} --version 2>&1 | head -5 || true "
               }
             }
           }
