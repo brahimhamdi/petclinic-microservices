@@ -12,7 +12,7 @@ services:
     restart: unless-stopped
 
   config-server:
-    image: nexus.advancia.com:5043/docker-prive/config-server
+    image: nexus.stb.com:5043/docker-prive/config-server
     container_name: config-server
     deploy:
       resources:
@@ -27,7 +27,7 @@ services:
      - 8888:8888
 
   discovery-server:
-    image: nexus.advancia.com:5043/docker-prive/discovery-server
+    image: nexus.stb.com:5043/docker-prive/discovery-server
     container_name: discovery-server
     deploy:
       resources:
@@ -45,7 +45,7 @@ services:
      - 8761:8761
 
   customers-service:
-    image: nexus.advancia.com:5043/docker-prive/customers-service
+    image: nexus.stb.com:5043/docker-prive/customers-service
     container_name: customers-service
     deploy:
       resources:
@@ -60,7 +60,7 @@ services:
     - 8084:8081
 
   visits-service:
-    image: nexus.advancia.com:5043/docker-prive/visits-service
+    image: nexus.stb.com:5043/docker-prive/visits-service
     container_name: visits-service
     deploy:
       resources:
@@ -75,7 +75,7 @@ services:
      - 8082:8082
 
   vets-service:
-    image: nexus.advancia.com:5043/docker-prive/vets-service
+    image: nexus.stb.com:5043/docker-prive/vets-service
     container_name: vets-service
     deploy:
       resources:
@@ -90,7 +90,7 @@ services:
      - 8083:8083
 
   api-gateway:
-    image: nexus.advancia.com:5043/docker-prive/api-gateway
+    image: nexus.stb.com:5043/docker-prive/api-gateway
     container_name: api-gateway
     deploy:
       resources:
